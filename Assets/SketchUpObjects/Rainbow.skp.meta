@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 9440b655d71e3b149996de1710bc2070
 timeCreated: 1456588258
+=======
+guid: 40c4ed7629b41ee4fa5f6c2da49685ba
+timeCreated: 1456589863
+>>>>>>> 0ff8943be78d01fd36e42802c5f79894f5c6b2ec
 licenseType: Free
 SketchUpImporter:
   generateBackFace: 0
