@@ -4,6 +4,7 @@ using System.Collections;
 public class BulletController : MonoBehaviour {
 
     public float timeInterval = 0f;
+    public float timer = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -12,7 +13,15 @@ public class BulletController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timeInterval += Time.deltaTime;
+        float temp = Time.deltaTime;
+        timeInterval += temp;
+        timer += temp;
+
+        if (timer >= 5)
+        {
+            Destroy(gameObject);
+        }
+        
 	}
 
     void OnCollisionEnter(Collision obj)
