@@ -1,39 +1,21 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 9440b655d71e3b149996de1710bc2070
-timeCreated: 1456588258
-=======
-guid: 40c4ed7629b41ee4fa5f6c2da49685ba
-timeCreated: 1456589863
->>>>>>> 0ff8943be78d01fd36e42802c5f79894f5c6b2ec
+guid: 02b3804606bcaab47be0862915df559c
+timeCreated: 1456596120
 licenseType: Free
-SketchUpImporter:
-  generateBackFace: 0
-  mergeCoplanarFaces: 0
-  selectedNodes: 
-  assetHash:
-    serializedVersion: 2
-    Hash: 0aaaed356e73fb0d0a0ff8c8fd381cfd
-  longitude: 0
-  latitude: 0
-  northCorrection: 0
-  fileUnit: 0
-  sketchUpImportData:
-    defaultCamera:
-      position: {x: 0, y: 0, z: 0}
-      lookAt: {x: 0, y: 0, z: 1}
-      up: {x: 0, y: 1, z: 0}
-      fov: 45
-      aspectRatio: 1.33
-      orthoSize: 0
-      isPerspective: 1
-    scenes: []
+ModelImporter:
   serializedVersion: 19
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: Mesh1
+    100002: //RootNode
+    400000: Mesh1
+    400002: //RootNode
+    2300000: Mesh1
+    3300000: Mesh1
+    4300000: Mesh1
   materials:
     importMaterials: 1
-    materialName: 2
-    materialSearch: 0
+    materialName: 0
+    materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -54,7 +36,7 @@ SketchUpImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.0254
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -73,7 +55,7 @@ SketchUpImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
