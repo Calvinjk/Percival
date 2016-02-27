@@ -27,21 +27,23 @@ public class SammyLeapController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Leap.Frame frame = controller.Frame();
-        Leap.Finger finger = frame.Hands[0].Fingers[(int)Leap.Finger.FingerType.TYPE_INDEX];
-        Vector3 fingerTipPos = finger.TipPosition.ToUnityScaled();
+        Leap.Hand hand = frame.Hands.Frontmost;
+        Vector3 handPos = hand.PalmPosition.ToUnityScaled();
 
+
+        /*
         //Boundary checks
-        if (fingerTipPos.x > leapBoundaryX) { fingerTipPos = new Vector3(leapBoundaryX, fingerTipPos.y, fingerTipPos.z); }
-        if (fingerTipPos.x < (-1 * leapBoundaryX)) { fingerTipPos = new Vector3((-1 * leapBoundaryX), fingerTipPos.y, fingerTipPos.z); }
-        if (fingerTipPos.y > leapMaxBoundaryY) { fingerTipPos = new Vector3(fingerTipPos.x, leapMaxBoundaryY, fingerTipPos.z); }
-        if (fingerTipPos.y < leapMinBoundaryY) { fingerTipPos = new Vector3(fingerTipPos.x, leapMinBoundaryY, fingerTipPos.z); }
-       // if (fingerTipPos.z > leapBoundaryZ) { fingerTipPos = new Vector3(fingerTipPos.x, fingerTipPos.y, leapBoundaryZ); }
-       // if (fingerTipPos.z < (leapBoundaryZ)) { fingerTipPos = new Vector3(fingerTipPos.x, fingerTipPos.y, (-1 * leapBoundaryZ)); }
+        if (handPos.x > leapBoundaryX) { handPos = new Vector3(leapBoundaryX, handPos.y, handPos.z); }
+        if (handPos.x < (-1 * leapBoundaryX)) { handPos = new Vector3((-1 * leapBoundaryX), handPos.y, handPos.z); }
+        if (handPos.y > leapMaxBoundaryY) { handPos = new Vector3(handPos.x, leapMaxBoundaryY, handPos.z); }
+        if (handPos.y < leapMinBoundaryY) { handPos = new Vector3(handPos.x, leapMinBoundaryY, handPos.z); }
+       // if (handPos.z > leapBoundaryZ) { handPos = new Vector3(handPos.x, handPos.y, leapBoundaryZ); }
+       // if (handPos.z < (leapBoundaryZ)) { handPos = new Vector3(handPos.x, handPos.y, (-1 * leapBoundaryZ)); }
 
 
-        float xPercent = fingerTipPos.x / leapBoundaryX;
-        float yPercent = 5f * (fingerTipPos.y - leapMinBoundaryY) / (leapMaxBoundaryY - leapMinBoundaryY);
-        //float zPercent = fingerTipPos.z / leapBoundaryZ;
+        float xPercent = handPos.x / leapBoundaryX;
+        float yPercent = 5f * (handPos.y - leapMinBoundaryY) / (leapMaxBoundaryY - leapMinBoundaryY);
+        //float zPercent = handPos.z / leapBoundaryZ;
 
         float screenX = xPercent * screenBoundaryX;
         float screenY = (-1 * screenBoundaryY) + (yPercent * screenBoundaryY) + 2;
@@ -49,7 +51,7 @@ public class SammyLeapController : MonoBehaviour {
 
         transform.position = new Vector3(screenX, screenY, screenZ);
 
-        Debug.Log(transform.position);
-
+        Debug.Log(hand.GrabStrength);
+        */
     }
 }
