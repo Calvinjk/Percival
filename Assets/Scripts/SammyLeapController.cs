@@ -8,15 +8,11 @@ public class SammyLeapController : MonoBehaviour {
     Leap.Controller controller;
     public GameObject cam;
 
-    public float leapBoundaryX      = 250f;
-    public float leapMinBoundaryY   = 100f;
-    public float leapMaxBoundaryY   = 700f;
-    public float leapBoundaryZ      = 150f;
-
-    public float screenBoundaryX    = 15f;
-    public float screenBoundaryY    = 6f;
-    //public float screenMinZ         = 0f;
-    //public float screenMaxZ         = 50f;
+    public float minX = -13f;
+    public float maxX = 12f;
+    public float minY = -4f;
+    public float maxY = 10;
+    public float zPos = 20f;
 
     // Use this for initialization
     void Start () {
@@ -26,32 +22,21 @@ public class SammyLeapController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Vector3 camPos = cam.transform.position;    
+
         Leap.Frame frame = controller.Frame();
         Leap.Hand hand = frame.Hands.Frontmost;
-        Vector3 handPos = hand.PalmPosition.ToUnityScaled();
+        Vector normalizedHandPos = Leap.Vector.Zero;
 
+        if (frame.InteractionBox.IsValid) {
+            normalizedHandPos = frame.InteractionBox.NormalizePoint(hand.PalmPosition, true);
+        }
 
-        /*
-        //Boundary checks
-        if (handPos.x > leapBoundaryX) { handPos = new Vector3(leapBoundaryX, handPos.y, handPos.z); }
-        if (handPos.x < (-1 * leapBoundaryX)) { handPos = new Vector3((-1 * leapBoundaryX), handPos.y, handPos.z); }
-        if (handPos.y > leapMaxBoundaryY) { handPos = new Vector3(handPos.x, leapMaxBoundaryY, handPos.z); }
-        if (handPos.y < leapMinBoundaryY) { handPos = new Vector3(handPos.x, leapMinBoundaryY, handPos.z); }
-       // if (handPos.z > leapBoundaryZ) { handPos = new Vector3(handPos.x, handPos.y, leapBoundaryZ); }
-       // if (handPos.z < (leapBoundaryZ)) { handPos = new Vector3(handPos.x, handPos.y, (-1 * leapBoundaryZ)); }
+        Vector3 handPos = normalizedHandPos.ToUnityScaled();
 
+        float xPos = minX + ((maxX - minX) * handPos.x);
+        float yPos = minY + ((maxY - minY) * handPos.y);
 
-        float xPercent = handPos.x / leapBoundaryX;
-        float yPercent = 5f * (handPos.y - leapMinBoundaryY) / (leapMaxBoundaryY - leapMinBoundaryY);
-        //float zPercent = handPos.z / leapBoundaryZ;
-
-        float screenX = xPercent * screenBoundaryX;
-        float screenY = (-1 * screenBoundaryY) + (yPercent * screenBoundaryY) + 2;
-        float screenZ = cam.transform.position.z + 20f; //screenMinZ + (zPercent * screenMaxZ);
-
-        transform.position = new Vector3(screenX, screenY, screenZ);
-
-        Debug.Log(hand.GrabStrength);
-        */
+        transform.position = new Vector3(camPos.x + xPos, camPos.y + yPos, camPos.z + zPos);
     }
 }
