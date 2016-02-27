@@ -61,6 +61,10 @@ public class ObjectSpawner : MonoBehaviour {
             } else if (enemyPrefabs[enemyNum].name == "Sun_Object")
             {
                 enemyY = (pos.y - floorDistance) + Random.Range(8f, 18f);
+            } else if (enemyPrefabs[enemyNum].name == "Cloud_Object")
+            {
+                enemyY = (pos.y - floorDistance) + Random.Range(8f, 18f);
+                randomAngle = false;
             }
             float enemyZ = pos.z + drawDistance - floorOffset;
             Vector3 enemySpawnPoint = new Vector3(enemyX, enemyY, enemyZ);
@@ -69,7 +73,14 @@ public class ObjectSpawner : MonoBehaviour {
             }
             else
             {
-                Instantiate(enemyPrefabs[enemyNum], enemySpawnPoint, Quaternion.Euler(0f, 90f, 0f));
+                if (enemyPrefabs[enemyNum].name == "Cloud_Object")
+                {
+                    Instantiate(enemyPrefabs[enemyNum], enemySpawnPoint, Quaternion.Euler(0f, 0f, 0f));
+                }
+                else
+                {
+                    Instantiate(enemyPrefabs[enemyNum], enemySpawnPoint, Quaternion.Euler(0f, 90f, 0f));
+                }
             }
 
         } else {
