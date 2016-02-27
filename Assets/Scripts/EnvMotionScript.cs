@@ -9,11 +9,13 @@ public class EnvMotionScript : MonoBehaviour {
 
     void Start() {
         sammy = GameObject.Find("Sammy the Smog Cloud");
+        GetComponent<Animator>().SetBool("Idle", true);
     }
 
     void Update() {
+        GetComponent<Animator>().SetBool("Idle", false);
         if (DistanceToObject(sammy) < attackDistance) {
-            //Attack();
+            Attack();
         }
     }
 
@@ -22,7 +24,6 @@ public class EnvMotionScript : MonoBehaviour {
     }
 
     float DistanceToObject(GameObject obj) {
-        Debug.Log(transform.position.z - obj.transform.position.z);
         return (transform.position.z - obj.transform.position.z);
     }
 }

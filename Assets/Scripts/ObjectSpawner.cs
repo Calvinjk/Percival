@@ -50,8 +50,8 @@ public class ObjectSpawner : MonoBehaviour {
             float enemyY = -1f;
             if (enemyPrefabs[enemyNum].name == "Dumb_Tree") {
                 enemyY = (pos.y - floorDistance);
-            } else if (enemyPrefabs[enemyNum].name == "Environmentalist") {
-                enemyY = (pos.y - floorDistance) + 4f;
+            } else if (enemyPrefabs[enemyNum].name == "Env_Object") {
+                enemyY = (pos.y - floorDistance) + 1.5f;
             }
             float enemyZ = pos.z + drawDistance - floorOffset;
             Vector3 enemySpawnPoint = new Vector3(enemyX, enemyY, enemyZ);
