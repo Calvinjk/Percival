@@ -14,6 +14,7 @@ public class ObjectSpawner : MonoBehaviour {
     public float lastPlacedPos;
     public Vector3 placedCamPos;
     public float curSpawnTimer      = 0f;
+    public bool randomAngle         = true;
 
 	// Use this for initialization
 	void Start () {
@@ -52,10 +53,24 @@ public class ObjectSpawner : MonoBehaviour {
                 enemyY = (pos.y - floorDistance);
             } else if (enemyPrefabs[enemyNum].name == "Env_Object") {
                 enemyY = (pos.y - floorDistance) + 1.5f;
+            } else if (enemyPrefabs[enemyNum].name == "Rainbow_Object") {
+                enemyY = (pos.y - floorDistance) + Random.Range(6f, 14f);
+                randomAngle = false;
+            } else if (enemyPrefabs[enemyNum].name == "Lolli_Object") {
+                enemyY = (pos.y - floorDistance) + 2f;
+            } else if (enemyPrefabs[enemyNum].name == "Sun_Object")
+            {
+                enemyY = (pos.y - floorDistance) + Random.Range(8f, 18f);
             }
             float enemyZ = pos.z + drawDistance - floorOffset;
             Vector3 enemySpawnPoint = new Vector3(enemyX, enemyY, enemyZ);
-            Instantiate(enemyPrefabs[enemyNum], enemySpawnPoint, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
+            if (randomAngle == true) {
+                Instantiate(enemyPrefabs[enemyNum], enemySpawnPoint, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
+            }
+            else
+            {
+                Instantiate(enemyPrefabs[enemyNum], enemySpawnPoint, Quaternion.Euler(0f, 90f, 0f));
+            }
 
         } else {
             curSpawnTimer += Time.deltaTime;
