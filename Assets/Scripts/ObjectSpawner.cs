@@ -8,10 +8,12 @@ public class ObjectSpawner : MonoBehaviour {
     public float floorDistance      = 3f;
     public float drawDistance       = 100f;
     public float floorOffset        = 10f;
+    public float enemySpawnTimer    = 1f;
     public bool ______________________________;
     public Vector3 pos;
     public float lastPlacedPos;
     public Vector3 placedCamPos;
+    public float curSpawnTimer      = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -38,8 +40,20 @@ public class ObjectSpawner : MonoBehaviour {
             lastPlacedPos += floorOffset;
         }
 
+        //Start randomly creating enemies
+        if (curSpawnTimer > enemySpawnTimer) {
+            curSpawnTimer = 0f;
 
+            int enemyNum = Random.Range(0, enemyPrefabs.Length - 1);
+            float enemyX = Random.Range(-10, 10);
+            float enemyY = (pos.y - floorDistance);
+            float enemyZ = pos.z + drawDistance - floorOffset;
+            Vector3 enemySpawnPoint = new Vector3(enemyX, enemyY, enemyZ);
+            Instantiate(enemyPrefabs[enemyNum], enemySpawnPoint, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
 
+        } else {
+            curSpawnTimer += Time.deltaTime;
+        }
 	}
 
     //Clean up after yourself!
