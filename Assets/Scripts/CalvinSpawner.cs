@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CalvinSpawner : MonoBehaviour {
 
@@ -201,6 +202,8 @@ public class CalvinSpawner : MonoBehaviour {
                 enemyNum = -1;
 
                 //TODO ENDSCREEN
+                SceneManager.LoadScene(2);
+                
                 break;
         }
 
