@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class CalvinSpawner : MonoBehaviour {
 
-    public enum State {Tutorial, Trees, Env, TreePeopleHiRain, Boss0, TreePeopleLowRain, AddClouds, AddLollipops, AddSun, Faster, Boss1, End, Endless};
+    public enum State {Tutorial, Trees, Env, TreePeopleHiRain, Boss0, TreePeopleLowRain, AddClouds, AddLollipops, AddSun, Faster, Boss1, End, Endless, Wait};
     public static State state;
+    public State stateController = State.Wait;
 
     public GameObject floorPrefab;
     public GameObject[] enemyPrefabs;
@@ -57,6 +58,11 @@ public class CalvinSpawner : MonoBehaviour {
                 enemySpawnTimer = .5f;
             }
         }
+
+        if(stateController != State.Wait) {
+            state = stateController;
+        }
+
         if (Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(0);
         }
