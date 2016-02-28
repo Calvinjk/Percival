@@ -221,7 +221,6 @@ public class CalvinSpawner : MonoBehaviour {
             case State.Endless:
                 enemyNum = Random.Range(0, 6);
                 enemySpawnTimer *= .999f;
-                camMvt.camSpeed *= 1.001f;
 
                 if (Random.Range(0, 2) == 0) { lowRain = true; }
                 else { lowRain = false; }
