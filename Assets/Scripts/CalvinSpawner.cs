@@ -59,7 +59,10 @@ public class CalvinSpawner : MonoBehaviour {
             }
         }
 
-        if(stateController != State.Wait) {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { stateController = State.Boss0; }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { stateController = State.Boss1; }
+
+        if (stateController != State.Wait) {
             state = stateController;
         }
 
