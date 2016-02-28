@@ -4,10 +4,12 @@ using Leap;
 
 public class SammyLeapController : MonoBehaviour {
 
-    public bool ________________________________;
-    Leap.Controller controller;
-    public GameObject cam;
-    public bool fastPhysics = false;
+    public float maxSloMo = 100f;
+    public float sloMoDrain = 1f;
+    public float minActiveSlow = 20f;
+    public float sloRecharge = 1f;
+
+    public Texture2D slowMotionBar;
 
     public float minX = -13f;
     public float maxX = 12f;
@@ -15,14 +17,42 @@ public class SammyLeapController : MonoBehaviour {
     public float maxY = 10;
     public float zPos = 20f;
 
+    public bool ________________________________;
+
+    Leap.Controller controller;
+    public GameObject cam;
+
+    public bool sloMo = false;
+    public bool sloRe = false;
+    public float curSloMo;
+
+
+
     // Use this for initialization
     void Start () {
         controller = new Leap.Controller();
         cam = GameObject.Find("Main Camera");
+        curSloMo = maxSloMo;
     }
 
     // Update is called once per frame
     void Update() {
+        if (sloMo) {
+            sloRe = false;
+            curSloMo -= sloMoDrain;
+            if (curSloMo <= 0) {
+                sloMo = false;
+            }
+        } else {
+            if (curSloMo < maxSloMo) {
+                curSloMo += sloRecharge;
+                sloRe = true;
+            } else {
+                sloRe = false;
+                curSloMo = maxSloMo;
+            }
+        }
+
         Vector3 camPos = cam.transform.position;
 
         Leap.Frame frame = controller.Frame();
@@ -42,16 +72,28 @@ public class SammyLeapController : MonoBehaviour {
 
 
         //Slow motion controller
-        if (hand.GrabStrength == 1f) {
+        if (hand.GrabStrength == 1f && curSloMo > minActiveSlow) {
             Time.timeScale = 0.2f;
-            Time.fixedDeltaTime /= 10;
-            fastPhysics = true;
+            if (sloMo == false) {
+                Time.fixedDeltaTime /= 10;
+                sloMo = true;
+            }
         } else {
             Time.timeScale = 1.0f;
-            if (fastPhysics == true) {
+            if (sloMo == true) {
                 Time.fixedDeltaTime *= 10;
-                fastPhysics = false;
+                sloMo = false;
             }
+        }
+    }
+
+    void OnGUI() {
+        //Only draw bar is being used or recharging
+        if (sloMo || sloRe) {
+            //Draw the bar
+            GUI.BeginGroup(new Rect((Screen.width / 2f) - (maxSloMo * 1.5f), (Screen.height * .95f), maxSloMo * 3, 20));
+                GUI.Box(new Rect(0, 0, curSloMo * 3, 20), slowMotionBar);
+            GUI.EndGroup();
         }
     }
 }
