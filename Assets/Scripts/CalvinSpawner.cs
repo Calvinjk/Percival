@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CalvinSpawner : MonoBehaviour {
 
-    public enum State {Tutorial, Trees, Env, TreePeopleHiRain, Boss0, TreePeopleLowRain, AddClouds, AddLollipops, AddSun, Faster, Boss1, End};
+    public enum State {Tutorial, Trees, Env, TreePeopleHiRain, Boss0, TreePeopleLowRain, AddClouds, AddLollipops, AddSun, Faster, Boss1, End, Endless};
     public static State state;
 
     public GameObject floorPrefab;
@@ -45,6 +46,18 @@ public class CalvinSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Endless mode Toggle
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (state == State.Endless) {
+                state = State.Tutorial;
+                GameObject.Find("ENDLESS_TEXT").GetComponent<Text>().enabled = false;
+            } else {
+                state = State.Endless;
+                GameObject.Find("ENDLESS_TEXT").GetComponent<Text>().enabled = true;
+            }
+        }
+
+
         //Dynamically create path if needed
         pos = transform.position;
         if ((lastPlacedPos - pos.z) < drawDistance) {
@@ -201,9 +214,16 @@ public class CalvinSpawner : MonoBehaviour {
                 //Stuff to do in this state
                 enemyNum = -1;
 
-                //TODO ENDSCREEN
-                SceneManager.LoadScene(2);
-                
+                //ENDSCREEN
+                SceneManager.LoadScene(2);  
+                break;
+            case State.Endless:
+                enemyNum = Random.Range(0, 6);
+                enemySpawnTimer *= .9999f;
+
+                if (Random.Range(0, 2) == 0) { lowRain = true; }
+                else { lowRain = false; }
+
                 break;
         }
 
@@ -258,7 +278,7 @@ public class CalvinSpawner : MonoBehaviour {
             switch (bossNum) {
                 case 0:
                     if (!inBossBattle) {
-                        Instantiate(boss[0], new Vector3(transform.position.x, transform.position.y + 4f, transform.position.z), Quaternion.Euler(0f, 270f, 0f));
+                        Instantiate(boss[0], new Vector3(transform.position.x, transform.position.y + 4f, transform.position.z), Quaternion.Euler(0f, 250f, 0f));
                         inBossBattle = true;
                     }
                     break;
