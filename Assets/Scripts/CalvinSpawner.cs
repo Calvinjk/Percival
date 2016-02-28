@@ -4,7 +4,7 @@ using System.Collections;
 public class CalvinSpawner : MonoBehaviour {
 
     public enum State {Tutorial, Trees, Env, TreePeopleHiRain, Boss0, TreePeopleLowRain, AddClouds, AddLollipops, AddSun, Faster, Boss1, End};
-    public State state;
+    public static State state;
 
     public GameObject floorPrefab;
     public GameObject[] enemyPrefabs;
