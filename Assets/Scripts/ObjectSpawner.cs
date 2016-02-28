@@ -54,7 +54,7 @@ public class ObjectSpawner : MonoBehaviour {
             } else if (enemyPrefabs[enemyNum].name == "Env_Object") {
                 enemyY = (pos.y - floorDistance) + 1.5f;
             } else if (enemyPrefabs[enemyNum].name == "Rainbow_Object") {
-                enemyY = (pos.y - floorDistance) + Random.Range(6f, 14f);
+                enemyY = (pos.y - floorDistance) + Random.Range(8f, 14f);
                 randomAngle = false;
             } else if (enemyPrefabs[enemyNum].name == "Lolli_Object") {
                 enemyY = (pos.y - floorDistance) + 2f;
