@@ -6,7 +6,7 @@ public class SammyCollisions : MonoBehaviour {
 
 	void OnCollisionEnter(Collision coll)
     {
-        Debug.Log(coll.gameObject.name);
+        CalvinSpawner.state = CalvinSpawner.State.Tutorial;
         Destroy(this.gameObject);
         SceneManager.LoadScene(1);
     }
