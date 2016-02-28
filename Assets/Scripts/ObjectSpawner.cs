@@ -72,12 +72,9 @@ public class ObjectSpawner : MonoBehaviour {
         //limit the enemyPrefabs Range
         int enemyNum = 0;
 
-        if (Time.time < vacuumStart)
-        {
+        if (Time.time < vacuumStart) {
 
-        }
-        else if (Time.time < highRainbowStart)
-        {
+        } else if (Time.time < highRainbowStart) {
             cam.camSpeed = 28f;
             enemySpawnTimer = 1.5f;
             print(Time.time);//start vacuums
