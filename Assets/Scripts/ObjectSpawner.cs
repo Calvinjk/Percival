@@ -49,8 +49,8 @@ public class ObjectSpawner : MonoBehaviour {
             float enemyX = Random.Range(-10, 10);
 
             float enemyY = -1f;
-            if (enemyPrefabs[enemyNum].name == "Dumb_Tree") {
-                enemyY = (pos.y - floorDistance);
+            if (enemyPrefabs[enemyNum].name == "Tree_Object") {
+                enemyY = (pos.y - floorDistance) + 1.5f;
             } else if (enemyPrefabs[enemyNum].name == "Env_Object") {
                 enemyY = (pos.y - floorDistance) + 1.5f;
             } else if (enemyPrefabs[enemyNum].name == "Rainbow_Object") {
@@ -88,8 +88,4 @@ public class ObjectSpawner : MonoBehaviour {
         }
 	}
 
-    //Clean up after yourself!
-    void OnCollisionEnter(Collision coll) {
-        Destroy(coll.gameObject);
-    }
 }
