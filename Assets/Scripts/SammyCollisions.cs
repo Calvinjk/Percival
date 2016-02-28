@@ -8,6 +8,6 @@ public class SammyCollisions : MonoBehaviour {
     {
         Debug.Log(coll.gameObject.name);
         Destroy(this.gameObject);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
