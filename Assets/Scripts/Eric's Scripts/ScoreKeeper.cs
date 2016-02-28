@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class ScoreKeeper : MonoBehaviour {
 
-    public int score = 0;
-    public int scoreMultiplier = 2721;
+    public long score = 0;
+    public int scoreMultiplier = 272;
     Text playerText;
 
 	// Use this for initialization
@@ -15,7 +15,7 @@ public class ScoreKeeper : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        score = (int)(Time.time * scoreMultiplier);
+        score += (long)(Time.deltaTime * scoreMultiplier);
         //playerText.text = "Score:" + score.ToString();
         //gameObject.text = "hello";
         GetComponent<Text>().text = "Score:" + score.ToString();

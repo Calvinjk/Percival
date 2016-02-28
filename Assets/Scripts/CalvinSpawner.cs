@@ -54,6 +54,7 @@ public class CalvinSpawner : MonoBehaviour {
             } else {
                 state = State.Endless;
                 GameObject.Find("ENDLESS_TEXT").GetComponent<Text>().enabled = true;
+                enemySpawnTimer = .5f;
             }
         }
 
@@ -219,7 +220,8 @@ public class CalvinSpawner : MonoBehaviour {
                 break;
             case State.Endless:
                 enemyNum = Random.Range(0, 6);
-                enemySpawnTimer *= .9999f;
+                enemySpawnTimer *= .999f;
+                camMvt.camSpeed *= 1.001f;
 
                 if (Random.Range(0, 2) == 0) { lowRain = true; }
                 else { lowRain = false; }
