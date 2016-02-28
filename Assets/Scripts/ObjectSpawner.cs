@@ -88,8 +88,4 @@ public class ObjectSpawner : MonoBehaviour {
         }
 	}
 
-    //Clean up after yourself!
-    void OnCollisionEnter(Collision coll) {
-        Destroy(coll.gameObject);
-    }
 }
