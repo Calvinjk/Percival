@@ -77,6 +77,7 @@ public class CalvinSpawner : MonoBehaviour {
         switch (state) {
             case State.Tutorial:
                 //Stuff to do in this state
+                inBossBattle = false;
 
                 //Getting ready to switch states
                 if (stateTimer < 0) {
