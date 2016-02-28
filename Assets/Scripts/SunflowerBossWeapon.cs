@@ -24,7 +24,7 @@ public class SunflowerBossWeapon : MonoBehaviour {
 	void Update () {
         if (curWeaponCooldown <= 0) {
             curWeaponCooldown = maxWeaponCooldown;
-            missileInstance = Instantiate(missilePrefab, new Vector3(Random.Range(0, 30), Random.Range(0, 30), transform.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+            missileInstance = Instantiate(missilePrefab, new Vector3(Random.Range(-15, 15), Random.Range(-5, 25), transform.position.z), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
             missileInstance.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 2f), -1f) * bulletSpeed * Random.Range(1, 2));
         }
         else {
