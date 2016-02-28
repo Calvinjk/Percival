@@ -9,8 +9,6 @@ public class SammyLeapController : MonoBehaviour {
     public float minActiveSlow = 20f;
     public float sloRecharge = 1f;
 
-    public Texture2D slowMotionBar;
-
     public float minX = -13f;
     public float maxX = 12f;
     public float minY = -4f;
@@ -72,7 +70,7 @@ public class SammyLeapController : MonoBehaviour {
 
 
         //Slow motion controller
-        if (hand.GrabStrength == 1f && curSloMo > minActiveSlow) {
+        if (hand.GrabStrength == 1f && (curSloMo > minActiveSlow || sloMo)) {
             Time.timeScale = 0.2f;
             if (sloMo == false) {
                 Time.fixedDeltaTime /= 10;
@@ -84,17 +82,6 @@ public class SammyLeapController : MonoBehaviour {
                 Time.fixedDeltaTime *= 10;
                 sloMo = false;
             }
-        }
-    }
-
-    void OnGUI() {
-        //Only draw bar is being used or recharging
-        if (sloMo || sloRe) {
-            //Draw the bar
-            GUI.BeginGroup(new Rect((Screen.width / 2f) - (maxSloMo * 1.5f), (Screen.height * .95f), maxSloMo * 3, 20));
-            slowMotionBar.Resize((int)curSloMo * 3, 20);
-            GUI.Box(new Rect(0, 0, curSloMo * 3, 20), slowMotionBar);
-            GUI.EndGroup();
         }
     }
 }
