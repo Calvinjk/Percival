@@ -92,7 +92,8 @@ public class SammyLeapController : MonoBehaviour {
         if (sloMo || sloRe) {
             //Draw the bar
             GUI.BeginGroup(new Rect((Screen.width / 2f) - (maxSloMo * 1.5f), (Screen.height * .95f), maxSloMo * 3, 20));
-                GUI.Box(new Rect(0, 0, curSloMo * 3, 20), slowMotionBar);
+            slowMotionBar.Resize((int)curSloMo * 3, 20);
+            GUI.Box(new Rect(0, 0, curSloMo * 3, 20), slowMotionBar);
             GUI.EndGroup();
         }
     }
