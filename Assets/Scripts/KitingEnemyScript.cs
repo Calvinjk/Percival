@@ -25,9 +25,8 @@ public class KitingEnemyScript : MonoBehaviour {
 	void Update () {
         float camSpeed = cam.GetComponent<Rigidbody>().velocity.z;
         GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, camSpeed - approachSpeed);
-        //Debug.Log(Mathf.Abs(transform.position.z - player.transform.position.z));
         if (Mathf.Abs(transform.position.z - player.transform.position.z) < killDistance) {
-            ObjectSpawner.inBossBattle = false;
+            CalvinSpawner.inBossBattle = false;
             Destroy(gameObject);
         }
     }
