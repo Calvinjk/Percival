@@ -57,6 +57,9 @@ public class CalvinSpawner : MonoBehaviour {
                 enemySpawnTimer = .5f;
             }
         }
+        if (Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene(0);
+        }
 
 
         //Dynamically create path if needed
