@@ -48,7 +48,7 @@ public class CalvinSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Endless mode Toggle
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             if (state == State.Endless) {
                 state = State.Tutorial;
                 GameObject.Find("ENDLESS_TEXT").GetComponent<Text>().enabled = false;
