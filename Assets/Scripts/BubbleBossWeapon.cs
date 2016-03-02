@@ -25,7 +25,7 @@ public class BubbleBossWeapon : MonoBehaviour {
             curWeaponCooldown = maxWeaponCooldown;
             littleMeInstance = Shoot();
             float vecX = Random.Range(-2f, 2f);
-            float vecY = Random.Range(-2f, 4f);
+            float vecY = Random.Range(-1f, 2f);
             littleMeInstance.GetComponent<Rigidbody>().AddForce(new Vector3(vecX, vecY, -1f) * bulletSpeed * Random.Range(1f,2f));
         } else {
             curWeaponCooldown -= Time.deltaTime;
