@@ -31,19 +31,19 @@ public class Gamestart : MonoBehaviour {
                 startText.text = "Make a fist to start!";
 
                 if (frame.Hands.Frontmost.GrabStrength == 1) {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene("CalvinTesting");
                 }
                 break;
             case Globals.ControlScheme.Mouse:
                 startText.text = "Click to start!";
                 if (Input.GetKeyUp(KeyCode.Mouse0)) {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene("CalvinTesting");
                 }   
                 break;
             case Globals.ControlScheme.Keyboard:
                 startText.text = "Press Enter to start!";
                 if (Input.GetKeyUp(KeyCode.Return)) {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene("CalvinTesting");
                 }
                 break;
             default:

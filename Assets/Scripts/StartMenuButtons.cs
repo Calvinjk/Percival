@@ -37,6 +37,6 @@ public class StartMenuButtons : MonoBehaviour {
         }
 
         //Done setting the control scheme variable, move onto the title screen
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);  //This line of code will load the NEXT scene in the buildIndex
+        SceneManager.LoadScene("Title");  //This line of code will load the NEXT scene in the buildIndex
     }
 }

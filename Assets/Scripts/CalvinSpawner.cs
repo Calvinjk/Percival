@@ -67,7 +67,7 @@ public class CalvinSpawner : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("Title");
         }
 
 
@@ -229,7 +229,7 @@ public class CalvinSpawner : MonoBehaviour {
                 enemyNum = -1;
 
                 //ENDSCREEN
-                SceneManager.LoadScene(2);  
+                SceneManager.LoadScene("End");  
                 break;
             case State.Endless:
                 enemyNum = Random.Range(0, 6);
