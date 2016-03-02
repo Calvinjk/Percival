@@ -82,6 +82,17 @@ public class SammyLeapController : MonoBehaviour {
                 else                                                                { SetSlowMotion(false); }
 
                 break;
+            case Globals.ControlScheme.Mouse:
+                Vector3 mousePos = Input.mousePosition;
+                Vector3 scaledMousePos = new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, mousePos.z);
+
+                xPos = minX + ((maxX - minX) * scaledMousePos.x);
+                yPos = minY + ((maxY - minY) * scaledMousePos.y);
+
+                if (Input.GetKey(KeyCode.Mouse0) && (curSloMo > minActiveSlow || sloMo))    { SetSlowMotion(true); }
+                else                                                                        { SetSlowMotion(false); }
+
+                break;
             case Globals.ControlScheme.Keyboard:
                 if (Input.GetKey(KeyCode.A))           { xPos -= moveSpeed; }
                 if (Input.GetKey(KeyCode.D))           { xPos += moveSpeed; }
@@ -105,28 +116,10 @@ public class SammyLeapController : MonoBehaviour {
         }
         
         transform.position = new Vector3(camPos.x + xPos, camPos.y + yPos, camPos.z + zPos);
-
-
-        //Slow motion controller
-        /*
-        if (hand.GrabStrength == 1f && (curSloMo > minActiveSlow || sloMo)) {
-            Time.timeScale = 0.2f;
-            if (sloMo == false) {
-                Time.fixedDeltaTime /= 10;
-                sloMo = true;
-            }
-        } else {
-            Time.timeScale = 1.0f;
-            if (sloMo == true) {
-                Time.fixedDeltaTime *= 10;
-                sloMo = false;
-            }
-        }
-        */
     }
 
-    void SetSlowMotion(bool onOff) {
-        if (onOff) {
+    void SetSlowMotion(bool activated) {
+        if (activated) {
             Time.timeScale = 0.2f;
             if (sloMo == false) {
                 Time.fixedDeltaTime /= 10;
