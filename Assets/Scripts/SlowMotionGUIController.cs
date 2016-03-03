@@ -34,7 +34,7 @@ public class SlowMotionGUIController : MonoBehaviour {
         sloMo = samLeapController.sloMo;
         sloRe = samLeapController.sloRe;  
 
-        if (sloMo || sloRe) {
+        if (sloMo ^ sloRe) {
             GetComponent<MeshRenderer>().enabled = true;
             leftParticle.SetActive(true);
             rightParticle.SetActive(true);
