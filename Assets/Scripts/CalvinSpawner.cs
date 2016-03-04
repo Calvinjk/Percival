@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class CalvinSpawner : MonoBehaviour {
 
-    public enum State {Tutorial, Trees, Env, TreePeopleHiRain, Boss0, TreePeopleLowRain, AddClouds, AddLollipops, AddSun, Faster, Boss1, End, Endless, Wait};
+    public enum State {Tutorial, Trees, Env, TreePeopleHiRain, Boss0, TreePeopleLowRain, AddClouds, AddLollipops, AddSun, Faster, Boss1, End, Endless};
     public static State state;
-    public State stateController = State.Wait;
 
     public GameObject floorPrefab;
     public GameObject[] enemyPrefabs;
@@ -16,6 +15,20 @@ public class CalvinSpawner : MonoBehaviour {
     public float drawDistance       = 100f;
     public float floorOffset        = 10f;
     public float enemySpawnTimer    = 1f;
+
+    public bool ________TIMES________;
+    public float tutorialTime = 0f;
+    public float treesTime = 10f;
+    public float envTime = 15f;
+    public float treePeopleHiRainTime = 8f;
+    public float boss0Time = 10f;
+    public float treePeopleLowRainTime = 15f;
+    public float addCloudsTime = 10f;
+    public float addLollipopsTime = 10f;
+    public float addSunTime = 10f;
+    public float fasterTime = 15f;
+    public float boss1Time = 10f;
+
     public bool ________________;
     public Vector3 pos;
     public float lastPlacedPos;
@@ -29,7 +42,7 @@ public class CalvinSpawner : MonoBehaviour {
     // Use this for initialization
     void Start () {
         state = State.Tutorial;
-        stateTimer = 3f;
+        stateTimer = tutorialTime;
         camMvt = (CameraMovement) GameObject.Find("Main Camera").GetComponent(typeof(CameraMovement));
 
         pos = transform.position;
@@ -59,11 +72,15 @@ public class CalvinSpawner : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { stateController = State.Boss0; }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { stateController = State.Boss1; }
-
-        if (stateController != State.Wait) {
-            state = stateController;
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { 
+            state = State.Boss0;
+            stateTimer = boss0Time;
+            camMvt.camSpeed = 45;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { 
+            state = State.Boss1;
+            stateTimer = boss1Time;
+            camMvt.camSpeed = 75;
         }
 
         if (Input.GetKeyDown(KeyCode.R)) {
@@ -94,7 +111,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.Trees;
-                    stateTimer = 10f;
+                    stateTimer = treesTime;
                     camMvt.camSpeed = 30;
                 }
                 break;
@@ -106,7 +123,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.Env;
-                    stateTimer = 15f;
+                    stateTimer = envTime;
                     camMvt.camSpeed = 35;
                 }
                 break;
@@ -118,7 +135,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.TreePeopleHiRain;
-                    stateTimer = 8f;
+                    stateTimer = treePeopleHiRainTime;
                     camMvt.camSpeed = 40;
                 }
                 break;
@@ -131,7 +148,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.Boss0;
-                    stateTimer = 10f;
+                    stateTimer = boss0Time;
                     camMvt.camSpeed = 45;
                 }
                 break;
@@ -143,7 +160,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0 && !inBossBattle) {
                     state = State.TreePeopleLowRain;
-                    stateTimer = 15f;
+                    stateTimer = treePeopleLowRainTime;
                     camMvt.camSpeed = 50;
                     bossNum = -1;
                 }
@@ -157,7 +174,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.AddClouds;
-                    stateTimer = 10f;
+                    stateTimer = addCloudsTime;
                     camMvt.camSpeed = 55;
                 }
                 break;
@@ -170,7 +187,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.AddLollipops;
-                    stateTimer = 10f;
+                    stateTimer = addLollipopsTime;
                     camMvt.camSpeed = 60;
                 }
                 break;
@@ -183,7 +200,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.AddSun;
-                    stateTimer = 10f;
+                    stateTimer = addSunTime;
                     camMvt.camSpeed = 65;
                 }
                 break;
@@ -196,7 +213,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.Faster;
-                    stateTimer = 15f;
+                    stateTimer = fasterTime;
                     camMvt.camSpeed = 70;
                 }
                 break;
@@ -209,7 +226,7 @@ public class CalvinSpawner : MonoBehaviour {
                 //Getting ready to switch states
                 if (stateTimer < 0) {
                     state = State.Boss1;
-                    stateTimer = 10f;
+                    stateTimer = boss1Time;
                     camMvt.camSpeed = 75;
                 }
                 break;
