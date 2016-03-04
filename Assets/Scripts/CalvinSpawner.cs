@@ -266,7 +266,7 @@ public class CalvinSpawner : MonoBehaviour {
 
             float enemyY = -1f;
             if (enemyPrefabs[enemyNum].name == "Tree_Object") {
-                enemyY = (pos.y - floorDistance) + 1.5f;
+                enemyY = (pos.y - floorDistance);
             } else if (enemyPrefabs[enemyNum].name == "Env_Object") {
                 enemyY = (pos.y - floorDistance) + 1.5f;
             } else if (enemyPrefabs[enemyNum].name == "Rainbow_Object") {
