@@ -14,6 +14,7 @@ public class CalvinSpawner : MonoBehaviour {
     public float floorDistance      = 3f;
     public float drawDistance       = 100f;
     public float floorOffset        = 10f;
+    public float floorSpan          = 15f;
     public float enemySpawnTimer    = 1f;
 
     public bool ________TIMES________;
@@ -51,7 +52,11 @@ public class CalvinSpawner : MonoBehaviour {
         //Create the inital ground blocks
         while (lastPlacedPos < drawDistance) {
             float zPlacement = pos.z + lastPlacedPos + floorOffset;
-            Instantiate(floorPrefab, new Vector3(pos.x, pos.y - floorDistance, zPlacement), Quaternion.identity);
+
+            //Make a line of floor tiles along the X axis at this Z position
+            for (float i = -(floorOffset * floorSpan); i < (floorOffset * floorSpan); i += floorOffset) {
+                Instantiate(floorPrefab, new Vector3(pos.x + i, pos.y - floorDistance, zPlacement), Quaternion.identity);
+            }
 
             lastPlacedPos = zPlacement;
             placedCamPos = pos;
@@ -59,7 +64,7 @@ public class CalvinSpawner : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         //Endless mode Toggle
         if (Input.GetKeyDown(KeyCode.E)) {
             if (state == State.Endless) {
@@ -91,7 +96,9 @@ public class CalvinSpawner : MonoBehaviour {
         //Dynamically create path if needed
         pos = transform.position;
         if ((lastPlacedPos - pos.z) < drawDistance) {
-            Instantiate(floorPrefab, new Vector3(pos.x, pos.y - floorDistance, lastPlacedPos + floorOffset), Quaternion.identity);
+            for (float i = -(floorOffset * floorSpan); i < (floorOffset * floorSpan); i += floorOffset) {
+                Instantiate(floorPrefab, new Vector3(pos.x + i, pos.y - floorDistance, lastPlacedPos + floorOffset), Quaternion.identity);
+            }
             lastPlacedPos += floorOffset;
         }
 
@@ -118,7 +125,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.Trees:
                 //Stuff to do in this state
                 enemyNum = 0;
-                enemySpawnTimer = 1f;
+                enemySpawnTimer = 0.05f;
 
                 //Getting ready to switch states
                 if (stateTimer < 0) {
@@ -262,7 +269,7 @@ public class CalvinSpawner : MonoBehaviour {
         if (curSpawnTimer > enemySpawnTimer && enemyNum != -1) {
             curSpawnTimer = 0f;
 
-            float enemyX = Random.Range(-11, 11);
+            float enemyX = Random.Range(transform.position.x - (floorSpan * floorOffset), transform.position.x + (floorSpan * floorOffset));
 
             float enemyY = -1f;
             if (enemyPrefabs[enemyNum].name == "Tree_Object") {

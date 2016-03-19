@@ -17,6 +17,8 @@ public class SammyLeapController : MonoBehaviour {
 
     public float moveSpeed = 1f;  //Not applicable to Leap Motion or Mouse control schemes
 
+    public float maxVelocity = 1f;
+
     public bool ________________________________;
 
     float xPos = 0;
@@ -116,6 +118,10 @@ public class SammyLeapController : MonoBehaviour {
         }
         
         transform.position = new Vector3(camPos.x + xPos, camPos.y + yPos, camPos.z + zPos);
+
+        //Now that the cloud's position onscreen is set, use those values to set X axis velocity of the cloud
+        float velocityMultiplier = 2 * ((transform.position.x - minX) / (maxX - minX)) - 1;
+        //GetComponent<Rigidbody>().velocity = new Vector3(maxVelocity * velocityMultiplier, 0, 0);
     }
 
     void SetSlowMotion(bool activated) {
