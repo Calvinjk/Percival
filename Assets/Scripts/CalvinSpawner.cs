@@ -46,7 +46,7 @@ public class CalvinSpawner : MonoBehaviour {
         camMvt = (CameraMovement) GameObject.Find("Main Camera").GetComponent(typeof(CameraMovement));
 
         pos = transform.position;
-        lastPlacedPos = -floorOffset;
+        lastPlacedPos = -floorOffset * 2;
 
         //Create the inital ground blocks
         while (lastPlacedPos < drawDistance) {
