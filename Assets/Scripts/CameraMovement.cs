@@ -3,9 +3,8 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
 
-    public float camSpeed           = 1f;
-    public float camSpeedIncRate    = .1f;
-    
+    public float zFollowDist = 20f;    
+
 	// Use this for initialization
 	void Start () {
 	
@@ -13,8 +12,8 @@ public class CameraMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + camSpeed);
-        GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, camSpeed);
-        camSpeed += camSpeedIncRate;
+        Vector3 sammyPos = GameObject.Find("Sammy the Smog Cloud").transform.position;
+        //TODO - Change the following line to Lerping?
+        transform.position = new Vector3(sammyPos.x, sammyPos.y, sammyPos.z - zFollowDist);
 	}
 }

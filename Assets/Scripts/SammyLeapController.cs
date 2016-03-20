@@ -17,7 +17,8 @@ public class SammyLeapController : MonoBehaviour {
 
     public float moveSpeed = 1f;  //Not applicable to Leap Motion or Mouse control schemes
 
-    public float maxVelocity = 1f;
+    public float maxVelocity    = 1f;
+    public float flySpeed       = 1f;
 
     public bool ________________________________;
 
@@ -37,7 +38,6 @@ public class SammyLeapController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         globals = (Globals)GameObject.Find("Globals").GetComponent(typeof(Globals));
-        cam = GameObject.Find("Main Camera");
         curSloMo = maxSloMo;
 
         if (globals.controlScheme == Globals.ControlScheme.LeapMotion) {
@@ -117,11 +117,11 @@ public class SammyLeapController : MonoBehaviour {
                 break;
         }
         
-        transform.position = new Vector3(camPos.x + xPos, camPos.y + yPos, camPos.z + zPos);
+        transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
 
         //Now that the cloud's position onscreen is set, use those values to set X axis velocity of the cloud
-        float velocityMultiplier = 2 * ((transform.position.x - minX) / (maxX - minX)) - 1;
-        //GetComponent<Rigidbody>().velocity = new Vector3(maxVelocity * velocityMultiplier, 0, 0);
+        float velocityMultiplier = 2 * ((xPos - minX) / (maxX - minX)) - 1;  //This is guaranteed to be a number between -1 and 1
+        GetComponent<Rigidbody>().velocity = new Vector3(maxVelocity * velocityMultiplier, 0, flySpeed);
     }
 
     void SetSlowMotion(bool activated) {

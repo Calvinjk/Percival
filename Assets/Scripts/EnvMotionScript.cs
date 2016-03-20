@@ -18,7 +18,6 @@ public class EnvMotionScript : MonoBehaviour {
     }
 
     void Update() {
-        camRatio = cam.camSpeed * .01f;
         GetComponent<Animator>().SetBool("Idle", false);
         if (DistanceToObject(sammy) < attackDistance * camRatio) {
             Attack();

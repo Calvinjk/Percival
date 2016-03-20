@@ -11,7 +11,7 @@ public class CalvinSpawner : MonoBehaviour {
     public GameObject floorPrefab;
     public GameObject[] enemyPrefabs;
     public GameObject[] boss;
-    public float floorDistance      = 3f;
+    public float floorPos           = -3f;
     public float drawDistance       = 100f;
     public float floorOffset        = 10f;
     public float floorSpan          = 15f;
@@ -36,7 +36,6 @@ public class CalvinSpawner : MonoBehaviour {
     public Vector3 placedCamPos;
     public float curSpawnTimer      = 0f;
     public bool randomAngle         = true;
-    public CameraMovement camMvt;
     public static bool inBossBattle = false;
     public float stateTimer = 0f;
 
@@ -44,7 +43,6 @@ public class CalvinSpawner : MonoBehaviour {
     void Start () {
         state = State.Tutorial;
         stateTimer = tutorialTime;
-        camMvt = (CameraMovement) GameObject.Find("Main Camera").GetComponent(typeof(CameraMovement));
 
         pos = transform.position;
         lastPlacedPos = -floorOffset * 2;
@@ -55,7 +53,7 @@ public class CalvinSpawner : MonoBehaviour {
 
             //Make a line of floor tiles along the X axis at this Z position
             for (float i = -(floorOffset * floorSpan); i < (floorOffset * floorSpan); i += floorOffset) {
-                Instantiate(floorPrefab, new Vector3(pos.x + i, pos.y - floorDistance, zPlacement), Quaternion.identity);
+                Instantiate(floorPrefab, new Vector3(pos.x + i, floorPos, zPlacement), Quaternion.identity);
             }
 
             lastPlacedPos = zPlacement;
@@ -80,12 +78,10 @@ public class CalvinSpawner : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha1)) { 
             state = State.Boss0;
             stateTimer = boss0Time;
-            camMvt.camSpeed = 45;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) { 
             state = State.Boss1;
             stateTimer = boss1Time;
-            camMvt.camSpeed = 75;
         }
 
         if (Input.GetKeyDown(KeyCode.R)) {
@@ -97,7 +93,7 @@ public class CalvinSpawner : MonoBehaviour {
         pos = transform.position;
         if ((lastPlacedPos - pos.z) < drawDistance) {
             for (float i = -(floorOffset * floorSpan); i < (floorOffset * floorSpan); i += floorOffset) {
-                Instantiate(floorPrefab, new Vector3(pos.x + i, pos.y - floorDistance, lastPlacedPos + floorOffset), Quaternion.identity);
+                Instantiate(floorPrefab, new Vector3(pos.x + i, floorPos, lastPlacedPos + floorOffset), Quaternion.identity);
             }
             lastPlacedPos += floorOffset;
         }
@@ -119,7 +115,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.Trees;
                     stateTimer = treesTime;
-                    camMvt.camSpeed = 30;
                 }
                 break;
             case State.Trees:
@@ -131,7 +126,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.Env;
                     stateTimer = envTime;
-                    camMvt.camSpeed = 35;
                 }
                 break;
             case State.Env:
@@ -143,7 +137,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.TreePeopleHiRain;
                     stateTimer = treePeopleHiRainTime;
-                    camMvt.camSpeed = 40;
                 }
                 break;
             case State.TreePeopleHiRain:
@@ -156,7 +149,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.Boss0;
                     stateTimer = boss0Time;
-                    camMvt.camSpeed = 45;
                 }
                 break;
             case State.Boss0:
@@ -168,7 +160,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0 && !inBossBattle) {
                     state = State.TreePeopleLowRain;
                     stateTimer = treePeopleLowRainTime;
-                    camMvt.camSpeed = 50;
                     bossNum = -1;
                 }
                 break;
@@ -182,7 +173,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.AddClouds;
                     stateTimer = addCloudsTime;
-                    camMvt.camSpeed = 55;
                 }
                 break;
             case State.AddClouds:
@@ -195,7 +185,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.AddLollipops;
                     stateTimer = addLollipopsTime;
-                    camMvt.camSpeed = 60;
                 }
                 break;
             case State.AddLollipops:
@@ -208,7 +197,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.AddSun;
                     stateTimer = addSunTime;
-                    camMvt.camSpeed = 65;
                 }
                 break;
             case State.AddSun:
@@ -221,7 +209,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.Faster;
                     stateTimer = fasterTime;
-                    camMvt.camSpeed = 70;
                 }
                 break;
             case State.Faster:
@@ -234,7 +221,6 @@ public class CalvinSpawner : MonoBehaviour {
                 if (stateTimer < 0) {
                     state = State.Boss1;
                     stateTimer = boss1Time;
-                    camMvt.camSpeed = 75;
                 }
                 break;
             case State.Boss1:
@@ -273,22 +259,22 @@ public class CalvinSpawner : MonoBehaviour {
 
             float enemyY = -1f;
             if (enemyPrefabs[enemyNum].name == "Tree_Object") {
-                enemyY = (pos.y - floorDistance);
+                enemyY = (floorPos);
             } else if (enemyPrefabs[enemyNum].name == "Env_Object") {
-                enemyY = (pos.y - floorDistance) + 1.5f;
+                enemyY = (floorPos) + 1.5f;
             } else if (enemyPrefabs[enemyNum].name == "Rainbow_Object") {
                 randomAngle = false;
                 if (lowRain) {
-                    enemyY = (pos.y - floorDistance) + Random.Range(8f, 14f);
+                    enemyY = (floorPos) + Random.Range(8f, 14f);
                 } else {
-                    enemyY = (pos.y - floorDistance) + Random.Range(30f, 50f);
+                    enemyY = (floorPos) + Random.Range(30f, 50f);
                 }
             } else if (enemyPrefabs[enemyNum].name == "Lolli_Object") {
-                enemyY = (pos.y - floorDistance) + 2f;
+                enemyY = (floorPos) + 2f;
             } else if (enemyPrefabs[enemyNum].name == "Sun_Object") {
-                enemyY = (pos.y - floorDistance) + Random.Range(8f, 18f);
+                enemyY = (floorPos) + Random.Range(8f, 18f);
             } else if (enemyPrefabs[enemyNum].name == "Cloud_Object") {
-                enemyY = (pos.y - floorDistance) + Random.Range(8f, 18f);
+                enemyY = (floorPos) + Random.Range(8f, 18f);
                 randomAngle = false;
             }
 
