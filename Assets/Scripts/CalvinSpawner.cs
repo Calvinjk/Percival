@@ -15,20 +15,20 @@ public class CalvinSpawner : MonoBehaviour {
     public float drawDistance       = 100f;
     public float floorOffset        = 10f;
     public float floorSpan          = 15f;
-    public float enemySpawnTimer    = 1f;
+    public float enemySpawnTimer    = .01f;
 
     public bool ________TIMES________;
     public float tutorialTime = 0f;
     public float treesTime = 10f;
     public float envTime = 15f;
     public float treePeopleHiRainTime = 8f;
-    public float boss0Time = 10f;
+    public float boss0Time = 1f;
     public float treePeopleLowRainTime = 15f;
     public float addCloudsTime = 10f;
     public float addLollipopsTime = 10f;
     public float addSunTime = 10f;
     public float fasterTime = 15f;
-    public float boss1Time = 10f;
+    public float boss1Time = 1f;
 
     public bool ________________;
     public Vector3 pos;
@@ -120,7 +120,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.Trees:
                 //Stuff to do in this state
                 enemyNum = 0;
-                enemySpawnTimer = 0.05f;
+                enemySpawnTimer = 0.01f;
 
                 //Getting ready to switch states
                 if (stateTimer < 0) {
@@ -131,7 +131,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.Env:
                 //Stuff to do in this state
                 enemyNum = 1;
-                enemySpawnTimer = .5f;
+                enemySpawnTimer = .01f;
 
                 //Getting ready to switch states
                 if (stateTimer < 0) {
@@ -142,7 +142,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.TreePeopleHiRain:
                 //Stuff to do in this state
                 enemyNum = Random.Range(0, 3);
-                enemySpawnTimer = .5f;
+                enemySpawnTimer = .01f;
                 lowRain = false;
 
                 //Getting ready to switch states
@@ -166,7 +166,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.TreePeopleLowRain:
                 //Stuff to do in this state
                 enemyNum = Random.Range(0, 3);
-                enemySpawnTimer = 0.5f;
+                enemySpawnTimer = 0.01f;
                 lowRain = true;
 
                 //Getting ready to switch states
@@ -178,7 +178,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.AddClouds:
                 //Stuff to do in this state
                 enemyNum = Random.Range(0, 4);
-                enemySpawnTimer = .4f;
+                enemySpawnTimer = .01f;
                 lowRain = true;
 
                 //Getting ready to switch states
@@ -190,7 +190,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.AddLollipops:
                 //Stuff to do in this state
                 enemyNum = Random.Range(0, 5);
-                enemySpawnTimer = .4f;
+                enemySpawnTimer = .01f;
                 lowRain = true;
 
                 //Getting ready to switch states
@@ -202,7 +202,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.AddSun:
                 //Stuff to do in this state  
                 enemyNum = Random.Range(0, 6);
-                enemySpawnTimer = .4f;
+                enemySpawnTimer = .01f;
                 lowRain = true;
 
                 //Getting ready to switch states
@@ -214,7 +214,7 @@ public class CalvinSpawner : MonoBehaviour {
             case State.Faster:
                 //Stuff to do in this state  
                 enemyNum = Random.Range(0, 6);
-                enemySpawnTimer = .35f;
+                enemySpawnTimer = .01f;
                 lowRain = true;
 
                 //Getting ready to switch states

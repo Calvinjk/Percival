@@ -4,7 +4,7 @@ using System.Collections;
 public class BubbleBossWeapon : MonoBehaviour {
 
     public GameObject   littleMePrefab;
-    public float        maxWeaponCooldown   = 1f;
+    public float        maxWeaponCooldown   = .1f;
     public float        bulletSize          = .20f;
     public float        bulletSpeed         = 100f;
 
@@ -24,7 +24,7 @@ public class BubbleBossWeapon : MonoBehaviour {
 	    if (curWeaponCooldown <= 0) {
             curWeaponCooldown = maxWeaponCooldown;
             littleMeInstance = Shoot();
-            float vecX = Random.Range(-2f, 2f);
+            float vecX = Random.Range(-20f, 20f);
             float vecY = Random.Range(-1f, 2f);
             littleMeInstance.GetComponent<Rigidbody>().AddForce(new Vector3(vecX, vecY, -1f) * bulletSpeed * Random.Range(1f,2f));
         } else {

@@ -46,7 +46,7 @@ public class SammyLeapController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         if (sloMo) {
             sloRe = false;
             curSloMo -= sloMoDrain;

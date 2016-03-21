@@ -4,7 +4,7 @@ using System.Collections;
 public class KitingEnemyScript : MonoBehaviour {
 
     public float initialSpawnDist   = 400f;
-    public float approachSpeed      = 1f;
+    public float moveSpeed      = 1f;
     public float killDistance       = 10f;
 
     public bool _____________________________;
@@ -22,9 +22,9 @@ public class KitingEnemyScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         float camSpeed = cam.GetComponent<Rigidbody>().velocity.z;
-        GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, camSpeed - approachSpeed);
+        transform.position = new Vector3(cam.transform.position.x, transform.position.y, transform.position.z + moveSpeed);
         if (Mathf.Abs(transform.position.z - player.transform.position.z) < killDistance) {
             CalvinSpawner.inBossBattle = false;
             Destroy(gameObject);
