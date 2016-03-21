@@ -127,16 +127,12 @@ public class SammyLeapController : MonoBehaviour {
     void SetSlowMotion(bool activated) {
         if (activated) {
             Time.timeScale = 0.2f;
-            if (sloMo == false) {
-                Time.fixedDeltaTime /= 10;
-                sloMo = true;
-            }
+            Time.fixedDeltaTime = 0.002f;
+            sloMo = true;
         } else {
             Time.timeScale = 1.0f;
-            if (sloMo == true) {
-                Time.fixedDeltaTime *= 10;
-                sloMo = false;
-            }
+            Time.fixedDeltaTime = 0.02f;
+            sloMo = false;
         }
     }
 }
